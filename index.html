@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Jan मित्र — आपका सरकारी साथी</title>
+<meta name="description" content="Your public friend — discover every Indian government welfare scheme you qualify for. Free, instant, private."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800;900&family=Tiro+Devanagari+Hindi:ital@0;1&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet"/>
+<script defer src="app.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config={darkMode:'class',theme:{extend:{colors:{saffron:{50:'#fff7ed',100:'#ffedd5',200:'#fed7aa',300:'#fdba74',400:'#fb923c',500:'#FF6B00',600:'#ea580c',700:'#c2410c'},gold:{400:'#fbbf24',500:'#FFB700',600:'#d97706'},navy:{600:'#131744',700:'#0D1230',800:'#08091A',900:'#04050F'},cream:{50:'#FDFAF5',100:'#F9F3E8',200:'#F0E6D3'}},fontFamily:{display:['"Baloo 2"','cursive'],hindi:['"Tiro Devanagari Hindi"','serif'],body:['"Crimson Pro"','Georgia','serif'],mono:['"JetBrains Mono"','monospace']},backgroundImage:{'saffron-gradient':'linear-gradient(135deg,#FF6B00 0%,#FFB700 100%)','indigo-gradient':'linear-gradient(135deg,#3949AB 0%,#1565C0 100%)'},boxShadow:{'saffron-glow':'0 0 40px rgba(255,107,0,0.35),0 0 80px rgba(255,107,0,0.15)','gold-glow':'0 0 30px rgba(255,183,0,0.3)','card-hover':'0 30px 60px rgba(0,0,0,0.3),0 0 0 1px rgba(255,107,0,0.1)','glass':'inset 0 1px 0 rgba(255,255,255,0.08),0 20px 40px rgba(0,0,0,0.2)'},animation:{'spin-slow':'spin 60s linear infinite','spin-medium':'spin 20s linear infinite','float':'float 6s ease-in-out infinite','pulse-glow':'pulseGlow 2.5s ease-in-out infinite','marquee':'marquee 30s linear infinite','marquee-r':'marqueeReverse 35s linear infinite','ticker':'marquee 22s linear infinite','scroll-dot':'scrollDot 1.8s ease-in-out infinite'},keyframes:{float:{'0%,100%':{transform:'translateY(0px)'},'50%':{transform:'translateY(-18px)'}},pulseGlow:{'0%,100%':{boxShadow:'0 0 20px rgba(255,107,0,0.3)'},'50%':{boxShadow:'0 0 60px rgba(255,107,0,0.7),0 0 100px rgba(255,183,0,0.3)'}},marquee:{'0%':{transform:'translateX(0%)'},'100%':{transform:'translateX(-50%)'}},marqueeReverse:{'0%':{transform:'translateX(-50%)'},'100%':{transform:'translateX(0%)'}},scrollDot:{'0%':{transform:'translateY(-100%)'},'100%':{transform:'translateY(200%)'}}}}}};
+</script>
+<style>
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes slideInLeft{from{opacity:0;transform:translateX(-60px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideInRight{from{opacity:0;transform:translateX(60px)}to{opacity:1;transform:translateX(0)}}
+@keyframes progressFill{from{width:0%}to{width:100%}}
+@keyframes charFadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shimmer{from{background-position:-200% center}to{background-position:200% center}}
+@keyframes chatSlideUp{from{opacity:0;transform:translateY(20px) scale(0.95)}to{opacity:1;transform:translateY(0) scale(1)}}
+html{scroll-behavior:smooth}body{-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:4px;height:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(255,107,0,0.4);border-radius:99px}
+input[type=range]{-webkit-appearance:none;background:transparent}input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:99px;background:rgba(255,255,255,0.1)}input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:#FF6B00;margin-top:-7px;box-shadow:0 0 10px rgba(255,107,0,0.5);cursor:pointer}
+.grain::after{content:'';position:absolute;inset:0;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:0.032;mix-blend-mode:overlay}
+html:not(.dark) .grain::after{opacity:0.018}
+.char-anim{opacity:0;animation:charFadeIn 0.5s forwards}
+.hero-jan{font-size:clamp(4rem,19vw,20rem)}.hero-mitra{font-size:clamp(4.5rem,23vw,25rem)}
+.shimmer-saffron{background:linear-gradient(90deg,#FF6B00 0%,#FFB700 40%,#FF6B00 80%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 4s linear infinite}
+.card-enter{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s ease}.card-enter.visible{opacity:1;transform:translateY(0)}
+.chat-window{animation:chatSlideUp 0.3s ease forwards}
+</style>
+</head>
+<body x-data="janMitraApp()" :class="darkMode?'dark':''" class="font-body bg-cream-50 dark:bg-navy-900 text-navy-900 dark:text-cream-50 transition-colors duration-500 overflow-x-hidden grain">
+
+<div x-show="loading" x-transition:leave="transition-opacity duration-700" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="fixed inset-0 z-[9999] bg-navy-900 flex flex-col items-center justify-center">
+  <svg class="w-24 h-24 motion-safe:animate-spin-medium text-saffron-500" viewBox="0 0 100 100" fill="none">
+    <circle cx="50" cy="50" r="46" stroke="currentColor" stroke-width="1.5" opacity="0.5"/><circle cx="50" cy="50" r="34" stroke="currentColor" stroke-width="1" opacity="0.3"/><circle cx="50" cy="50" r="5" fill="currentColor" opacity="0.8"/>
+    <g stroke="currentColor" stroke-width="1.2" opacity="0.85">
+      <line x1="50" y1="50" x2="50" y2="4"/><line x1="50" y1="50" x2="50" y2="4" transform="rotate(15 50 50)"/><line x1="50" y1="50" x2="50" y2="4" transform="rotate(30 50 50)"/><line x1="50" y1="50" x2="50" y2="4" transform="rotate(45 50 50)"/><line x1="50" y1="50" x2="50" y2="4" transform="rotate(60 50 50)"/><line x1="50" y1="50" x2="50" y2="4" transform="rotate(75 50 50)"/><line x1="50" y1="50" x2="50" y2="4" transform="rotate(90 50 50)"/><line x1="50" y1="50" x2="50" y2="4" transform="rotate(105 50 50)"/><line x1="50" y1="50" x2="50" y2="4" transform="rotate(120 50 50)"/><line x1="50" y1="50" x2="50" y2="4" transform="rotate(135 50 50)"/><line x1="50" y1="50" x2="50" y2="4" transform="rotate(150 50 50)"/><line x1="50" y1="50" x2="50" y2="4" transform="rotate(165 50 50)"/><line x1="50" y1="50" x2="50" y2="4" transform="rotate(180 50 50)"/><line x1="50" y1="50" x2="50" y2="4" transform="rotate(195 50 50)"/><line x1="50" y1="50" x2="50" y2="4" transform="rotate(210 50 50)"/><line x1="50" y1="50" x2="50" y2="4" transform="rotate(225 50 50)"/><line x1="50" y1="50" x2="50" y2="4" transform="rotate(240 50 50)"/><line x1="50" y1="50" x2="50" y2="4" transform="rotate(255 50 50)"/><line x1="50" y1="50" x2="50" y2="4" transform="rotate(270 50 50)"/><line x1="50" y1="50" x2="50" y2="4" transform="rotate(285 50 50)"/><line x1="50" y1="50" x2="50" y2="4" transform="rotate(300 50 50)"/><line x1="50" y1="50" x2="50" y2="4" transform="rotate(315 50 50)"/><line x1="50" y1="50" x2="50" y2="4" transform="rotate(330 50 50)"/><line x1="50" y1="50" x2="50" y2="4" transform="rotate(345 50 50)"/>
+    </g>
+    <g fill="currentColor" opacity="0.6">
+      <circle cx="50" cy="4" r="1.8"/><circle cx="50" cy="4" r="1.8" transform="rotate(15 50 50)"/><circle cx="50" cy="4" r="1.8" transform="rotate(30 50 50)"/><circle cx="50" cy="4" r="1.8" transform="rotate(45 50 50)"/><circle cx="50" cy="4" r="1.8" transform="rotate(60 50 50)"/><circle cx="50" cy="4" r="1.8" transform="rotate(75 50 50)"/><circle cx="50" cy="4" r="1.8" transform="rotate(90 50 50)"/><circle cx="50" cy="4" r="1.8" transform="rotate(105 50 50)"/><circle cx="50" cy="4" r="1.8" transform="rotate(120 50 50)"/><circle cx="50" cy="4" r="1.8" transform="rotate(135 50 50)"/><circle cx="50" cy="4" r="1.8" transform="rotate(150 50 50)"/><circle cx="50" cy="4" r="1.8" transform="rotate(165 50 50)"/><circle cx="50" cy="4" r="1.8" transform="rotate(180 50 50)"/><circle cx="50" cy="4" r="1.8" transform="rotate(195 50 50)"/><circle cx="50" cy="4" r="1.8" transform="rotate(210 50 50)"/><circle cx="50" cy="4" r="1.8" transform="rotate(225 50 50)"/><circle cx="50" cy="4" r="1.8" transform="rotate(240 50 50)"/><circle cx="50" cy="4" r="1.8" transform="rotate(255 50 50)"/><circle cx="50" cy="4" r="1.8" transform="rotate(270 50 50)"/><circle cx="50" cy="4" r="1.8" transform="rotate(285 50 50)"/><circle cx="50" cy="4" r="1.8" transform="rotate(300 50 50)"/><circle cx="50" cy="4" r="1.8" transform="rotate(315 50 50)"/><circle cx="50" cy="4" r="1.8" transform="rotate(330 50 50)"/><circle cx="50" cy="4" r="1.8" transform="rotate(345 50 50)"/>
+    </g>
+  </svg>
+  <div class="mt-8 font-display font-black text-5xl tracking-tight flex items-baseline gap-3">
+    <span class="text-cream-50 char-anim" style="animation-delay:0.5s">Jan</span>
+    <span class="shimmer-saffron" style="animation-delay:0.75s">मित्र</span>
+  </div>
+  <p class="mt-3 font-hindi text-cream-50/40 text-4xl char-anim" style="animation-delay:1s">आपका सरकारी साथी</p>
+  <div class="absolute bottom-0 left-0 h-[3px] bg-saffron-gradient" style="animation:progressFill 2.8s ease-in-out forwards;width:0%"></div>
+</div>
+
+<nav class="fixed top-0 inset-x-0 z-50 transition-all duration-300" :class="scrolled?'bg-navy-900/90 backdrop-blur-xl border-b border-white/5 shadow-2xl':'bg-transparent'">
+  <div class="px-10 py-5 flex items-center justify-between">
+    <a href="#home" class="font-display font-black text-4xl flex items-baseline gap-1 shrink-0">
+      <span class="text-navy-900 dark:text-cream-50">Jan</span><span class="shimmer-saffron">मित्र</span>
+    </a>
+    <ul class="hidden lg:flex items-center gap-0.5">
+      <template x-for="link in navLinks" :key="link.id">
+        <li><a :href="link.href" class="px-3.5 py-2 rounded-full font-display font-semibold text-xl transition-all duration-200" :class="activeSection===link.id?'bg-saffron-500/10 text-saffron-500':'text-navy-700 dark:text-cream-50/65 hover:text-saffron-500 hover:bg-saffron-500/5'" x-text="link.label"></a></li>
+      </template>
+    </ul>
+    <div class="flex items-center gap-3">
+      <button @click="toggleDarkMode($event)" class="theme-toggle relative w-14 h-7 rounded-full transition-all duration-500 overflow-hidden focus:outline-none focus:ring-2 focus:ring-saffron-500/50" :class="darkMode?'bg-navy-700 ring-1 ring-white/10':'bg-amber-100 ring-1 ring-amber-300/60'" aria-label="Toggle dark mode">
+        <div class="absolute inset-0 flex items-center px-1">
+          <div class="w-5 h-5 rounded-full flex items-center justify-center shadow-lg transition-all duration-500" :class="darkMode?'translate-x-0 bg-navy-800':'translate-x-7 bg-white'">
+            <svg x-show="darkMode" class="w-3 h-3 text-yellow-300" fill="currentColor" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+            <svg x-show="!darkMode" class="w-3 h-3 text-amber-500" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="21" x2="12" y2="23" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="1" y1="12" x2="3" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="21" y1="12" x2="23" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+      </button>
+      <div x-data="{ open: false }" class="relative hidden lg:block">
+        <button @click="open=!open" class="flex items-center gap-1.5 px-3 py-2 rounded-full border border-black/10 dark:border-white/10 font-display font-bold text-sm text-navy-700 dark:text-cream-50/70 hover:border-saffron-500/30 hover:text-saffron-500 transition-all" :class="langTranslating?'opacity-50 pointer-events-none':''">
+          <span x-text="languages.find(l=>l.code===langCode)?.flag||'🌐'"></span>
+          <span x-text="languages.find(l=>l.code===langCode)?.label||'Language'"></span>
+          <svg class="w-3 h-3 transition-transform" :class="open?'rotate-180':''" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+        </button>
+        <div x-show="open" @click.outside="open=false" x-transition:enter="transition ease-out duration-150" x-transition:enter-start="opacity-0 scale-95 -translate-y-2" x-transition:enter-end="opacity-100 scale-100 translate-y-0" class="absolute right-0 top-full mt-1 w-36 z-40 rounded-xl bg-cream-50 dark:bg-navy-800 border border-black/10 dark:border-white/10 shadow-2xl overflow-hidden" style="display:none">
+          <template x-for="lang in languages" :key="lang.code">
+            <button @click="setLanguage(lang.code);open=false" class="w-full text-left flex items-center gap-2 px-3 py-2 text-sm font-display font-semibold hover:bg-saffron-500/8 hover:text-saffron-500 transition-colors" :class="langCode===lang.code?'text-saffron-500 bg-saffron-500/5':'text-navy-700/70 dark:text-cream-50/70'">
+              <span x-text="lang.flag"></span><span x-text="lang.label"></span>
+            </button>
+          </template>
+        </div>
+      </div>
+      <button @click="eligibilityModalOpen=true" class="hidden lg:flex items-center gap-2 px-5 py-2 rounded-full bg-saffron-gradient font-display font-bold text-xl text-white shadow-saffron-glow hover:scale-105 active:scale-95 transition-transform duration-150 motion-safe:animate-pulse-glow focus:outline-none focus:ring-2 focus:ring-saffron-500/50">🎯 <span x-text="t('Find My Schemes')||'Find My Schemes'"></span></button>
+      <button @click="mobileMenuOpen=true" class="lg:hidden w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex flex-col items-center justify-center gap-1.5 hover:bg-saffron-500/10 transition-colors" aria-label="Open menu">
+        <span class="w-5 h-0.5 bg-current rounded-full"></span><span class="w-4 h-0.5 bg-current rounded-full"></span><span class="w-5 h-0.5 bg-current rounded-full"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div x-show="mobileMenuOpen" x-transition:enter="transition-opacity duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity duration-300" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click="mobileMenuOpen=false" class="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm lg:hidden" style="display:none"></div>
+<div x-show="mobileMenuOpen" x-transition:enter="transition-transform duration-400 ease-out" x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition-transform duration-300 ease-in" x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full" class="fixed left-0 top-0 bottom-0 w-72 z-50 bg-cream-50 dark:bg-navy-900 border-r border-saffron-500/20 flex flex-col lg:hidden shadow-2xl" style="display:none">
+  <div class="p-6 border-b border-black/5 dark:border-white/5 flex items-center justify-between">
+    <div class="font-display font-black text-xl"><span class="text-navy-900 dark:text-cream-50">Jan</span><span class="shimmer-saffron">मित्र</span></div>
+    <button @click="mobileMenuOpen=false" class="w-8 h-8 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center hover:bg-black/10 dark:hover:bg-white/10 transition-colors text-sm">✕</button>
+  </div>
+  <nav class="flex-1 overflow-y-auto p-4 space-y-1">
+    <template x-for="(link,idx) in navLinks" :key="link.id">
+      <a :href="link.href" @click="mobileMenuOpen=false" class="flex items-center gap-3 px-4 py-3 rounded-xl font-display font-semibold text-sm transition-all duration-200 hover:bg-saffron-500/8 hover:text-saffron-500 text-navy-700 dark:text-cream-50/70" :class="activeSection===link.id?'bg-saffron-500/10 text-saffron-500':''">
+        <span class="text-base" x-text="link.icon"></span><span x-text="link.label"></span>
+      </a>
+    </template>
+  </nav>
+  <div class="p-5 border-t border-black/5 dark:border-white/5 space-y-3">
+    <div class="flex items-center justify-between">
+      <span class="font-display font-bold text-xs text-navy-700/60 dark:text-cream-50/40 uppercase tracking-widest">Theme</span>
+      <button @click="toggleDarkMode($event)" class="theme-toggle relative w-14 h-7 rounded-full transition-all duration-500" :class="darkMode?'bg-navy-700':'bg-amber-100'">
+        <div class="absolute inset-0 flex items-center px-1"><div class="w-5 h-5 rounded-full shadow-md transition-all duration-500" :class="darkMode?'translate-x-0 bg-navy-800':'translate-x-7 bg-white'"></div></div>
+      </button>
+    </div>
+    <div class="flex gap-2 flex-wrap">
+      <template x-for="lang in languages" :key="lang.code">
+        <button @click="setLanguage(lang.code)" class="px-3 py-1 rounded-full text-xs font-display font-bold border transition-all" :class="langCode===lang.code?'bg-saffron-500 border-saffron-500 text-white':'border-black/10 dark:border-white/10 text-navy-700/70 dark:text-cream-50/60 hover:text-saffron-500'" x-text="lang.flag+' '+lang.label"></button>
+      </template>
+    </div>
+    <button @click="eligibilityModalOpen=true;mobileMenuOpen=false" class="w-full py-3 rounded-xl bg-saffron-gradient font-display font-bold text-white text-sm hover:opacity-90 transition-opacity">🎯 Find My Schemes</button>
+  </div>
+</div>
+
+<section id="home" class="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-b from-navy-900 via-navy-800 to-navy-900 dark:block hidden"></div>
+  <div class="absolute inset-0 bg-gradient-to-b from-cream-100 via-cream-50 to-cream-100 dark:hidden block"></div>
+  <div class="absolute inset-0" style="background:radial-gradient(ellipse 70% 55% at 50% 50%,rgba(255,107,0,0.09) 0%,transparent 70%)"></div>
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] h-[90vw] max-w-[850px] max-h-[850px] pointer-events-none opacity-[0.035]">
+    <svg class="w-full h-full motion-safe:animate-spin-slow text-saffron-500" viewBox="0 0 200 200" fill="none"><circle cx="100" cy="100" r="92" stroke="currentColor" stroke-width="2"/><circle cx="100" cy="100" r="68" stroke="currentColor" stroke-width="1"/><circle cx="100" cy="100" r="10" fill="currentColor"/></svg>
+  </div>
+  <div class="absolute w-1.5 h-1.5 rounded-full bg-saffron-500/40 top-[18%] left-[12%] motion-safe:animate-float" style="animation-delay:0s"></div>
+  <div class="absolute w-1 h-1 rounded-full bg-gold-500/30 top-[72%] left-[8%] motion-safe:animate-float" style="animation-delay:1.5s"></div>
+  <div class="absolute w-2 h-2 rounded-full bg-saffron-500/25 top-[30%] right-[10%] motion-safe:animate-float" style="animation-delay:0.8s"></div>
+  <div class="absolute w-1 h-1 rounded-full bg-gold-400/40 top-[55%] right-[15%] motion-safe:animate-float" style="animation-delay:2.2s"></div>
+  <div class="absolute w-1.5 h-1.5 rounded-full bg-saffron-500/30 top-[80%] right-[25%] motion-safe:animate-float" style="animation-delay:3.1s"></div>
+  <div class="relative z-10 text-center px-6 select-none pt-20 pb-16">
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-saffron-500/30 bg-saffron-500/5 backdrop-blur-sm mb-8" style="animation:fadeSlideUp 0.8s 1s both">
+      <span class="w-2 h-2 rounded-full bg-saffron-500 motion-safe:animate-pulse"></span>
+      <span class="font-display font-bold text-sm text-saffron-500">AI-Powered · 1,247 Schemes · Free Forever</span>
+    </div>
+    <div class="overflow-hidden leading-none"><h1 class="hero-jan font-display font-black tracking-tighter leading-none text-navy-900 dark:text-cream-50" style="animation:slideInLeft 1.2s 0.3s both">Jan</h1></div>
+    <div class="overflow-hidden leading-none -mt-3 md:-mt-6 xl:-mt-10"><h1 class="hero-mitra font-display font-black tracking-tighter leading-none shimmer-saffron drop-shadow-[0_0_60px_rgba(255,107,0,0.4)]" style="animation:slideInRight 1.2s 0.5s both">मित्र</h1></div>
+    <p class="font-body italic text-lg md:text-4xl text-navy-700/55 dark:text-cream-50/50 mt-6 max-w-2xl mx-auto leading-relaxed" style="animation:fadeSlideUp 0.8s 1.2s both">हर सरकारी योजनाएं &nbsp;·&nbsp; <em>One Platform</em> &nbsp;·&nbsp; आपके लिए</p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-10" style="animation:fadeSlideUp 0.8s 1.5s both">
+      <button @click="eligibilityModalOpen=true" class="group flex items-center gap-2 px-8 py-4 rounded-full bg-saffron-gradient font-display font-bold text-white text-2xl shadow-saffron-glow hover:scale-105 active:scale-95 transition-all duration-200 motion-safe:animate-pulse-glow focus:outline-none focus:ring-2 focus:ring-saffron-500/50">
+        <span>🎯</span><span x-text="t('Check My Eligibility')||'Check My Eligibility'"></span><span class="group-hover:translate-x-1 transition-transform duration-200">→</span>
+      </button>
+      <a href="#schemes" class="flex items-center gap-2 px-8 py-4 rounded-full border border-navy-700/15 dark:border-white/15 bg-black/5 dark:bg-white/5 backdrop-blur-sm font-display font-bold text-navy-900 dark:text-cream-50 text-2xl hover:border-saffron-500/40 hover:bg-saffron-500/5 transition-all duration-200">
+        <span>📜</span><span x-text="t('Browse Schemes')||'Browse Schemes'"></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="relative overflow-hidden bg-saffron-gradient py-5 -skew-y-1 my-8">
+  <div class="skew-y-1">
+    <div class="flex overflow-hidden mb-1.5"><div class="flex items-center gap-8 motion-safe:animate-marquee whitespace-nowrap"><template x-for="i in 4" :key="i"><div class="flex items-center gap-8 shrink-0"><span class="font-display font-black text-xl tracking-widest text-white uppercase">PM KISAN</span><span class="text-white/40 text-lg">✦</span><span class="font-display font-black text-xl tracking-widest text-white uppercase">AYUSHMAN BHARAT</span><span class="text-white/40 text-lg">✦</span><span class="font-display font-black text-xl tracking-widest text-white uppercase">PM AWAS YOJANA</span><span class="text-white/40 text-lg">✦</span><span class="font-display font-black text-xl tracking-widest text-white uppercase">MUDRA LOAN</span><span class="text-white/40 text-lg">✦</span><span class="font-display font-black text-xl tracking-widest text-white uppercase">MGNREGA</span><span class="text-white/40 text-lg">✦</span><span class="font-display font-black text-xl tracking-widest text-white uppercase">BETI BACHAO</span><span class="text-white/40 text-lg">✦</span><span class="font-display font-black text-xl tracking-widest text-white uppercase">PM UJJWALA</span><span class="text-white/40 text-lg">✦</span><span class="font-display font-black text-xl tracking-widest text-white uppercase">FASAL BIMA</span><span class="text-white/40 text-lg">✦</span></div></template></div></div>
+    <div class="flex overflow-hidden"><div class="flex items-center gap-8 motion-safe:animate-marquee-r whitespace-nowrap"><template x-for="i in 4" :key="i"><div class="flex items-center gap-8 shrink-0 font-hindi text-xl text-white/65"><span>पीएम किसान</span><span class="text-white/25">•</span><span>आयुष्मान भारत</span><span class="text-white/25">•</span><span>प्रधानमंत्री आवास</span><span class="text-white/25">•</span><span>मनरेगा</span><span class="text-white/25">•</span><span>बेटी बचाओ बेटी पढ़ाओ</span><span class="text-white/25">•</span><span>पीएम उज्ज्वला</span><span class="text-white/25">•</span><span>फसल बीमा</span><span class="text-white/25">•</span><span>मुद्रा लोन</span><span class="text-white/25">•</span></div></template></div></div>
+  </div>
+</div>
+
+<section id="problem" class="py-28 px-6 relative overflow-hidden">
+  <div class="absolute inset-0 opacity-[0.018]" style="background-image:repeating-linear-gradient(0deg,#FF6B00,#FF6B00 1px,transparent 1px,transparent 64px),repeating-linear-gradient(90deg,#FF6B00,#FF6B00 1px,transparent 1px,transparent 64px)"></div>
+  <div class="max-w-7xl mx-auto">
+    <div class="flex items-center gap-3 mb-16 card-enter" data-observe><div class="h-px flex-1 bg-gradient-to-r from-transparent to-saffron-500/40"></div><span class="font-display font-bold text-2xl tracking-[5px] uppercase text-saffron-500">The Problem</span><div class="h-px flex-1 bg-gradient-to-l from-transparent to-saffron-500/40"></div></div>
+    <div class="card-enter" data-observe>
+      <div class="overflow-hidden"><h2 class="font-display font-black text-6xl md:text-8xl xl:text-9xl leading-none tracking-tighter text-navy-900 dark:text-cream-50">The system</h2></div>
+      <div class="overflow-hidden mt-2"><h2 class="font-display font-black text-6xl md:text-8xl xl:text-9xl leading-none tracking-tighter bg-gradient-to-r from-red-500 to-orange-600 bg-clip-text text-transparent">is broken.</h2></div>
+      <div class="space-y-5 font-body text-4xl text-navy-700/65 dark:text-cream-50/65 leading-relaxed mt-10">
+        <p>Millions of Indian citizens are entitled to welfare benefits they will <strong class="text-navy-900 dark:text-cream-50 font-semibold">never receive</strong>. Not because the schemes don't exist — they do. <span class="font-mono font-bold text-saffron-500">1,247</span> of them.</p>
+        <p>A farmer in rural UP doesn't know he qualifies for PM Kisan <em>and</em> Fasal Bima <em>and</em> Kisan Credit Card — simultaneously. A young woman in Bihar is entitled to <span class="font-mono font-bold text-gold-500">7 different schemes</span> just by virtue of her age and address.</p>
+        <p>The information is scattered across <span class="font-mono font-bold text-red-500">40+ government portals</span>, buried in bureaucratic PDFs, written in language nobody actually speaks.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="how" class="py-28 px-6 relative">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex items-center gap-3 mb-6 card-enter" data-observe><div class="h-px flex-1 bg-gradient-to-r from-transparent to-saffron-500/40"></div><span class="font-display font-bold text-2xl tracking-[5px] uppercase text-saffron-500">How It Works</span><div class="h-px flex-1 bg-gradient-to-l from-transparent to-saffron-500/40"></div></div>
+    <h2 class="font-display font-black text-4xl md:text-6xl text-center text-navy-900 dark:text-cream-50 mb-16 card-enter" data-observe>Three steps to <span class="shimmer-saffron">your benefits</span></h2>
+    <div class="space-y-5">
+      <div class="group relative p-8 md:p-12 rounded-3xl border border-black/8 dark:border-white/8 bg-black/2 dark:bg-white/2 backdrop-blur-sm overflow-hidden hover:border-saffron-500/30 transition-all duration-500 card-enter" data-observe>
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_15%_50%,rgba(255,107,0,0.06)_0%,transparent_70%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+        <div class="relative flex flex-col md:flex-row items-start md:items-center gap-6 md:gap-10">
+          <div class="shrink-0 font-mono font-black text-[5rem] md:text-[7rem] leading-none text-saffron-500/12 group-hover:text-saffron-500/22 transition-colors duration-500 select-none">01</div>
+          <div class="flex-1"><h3 class="font-display font-extrabold text-4xl md:text-6xl text-navy-900 dark:text-cream-50 mb-3">Tell Us About You</h3><p class="font-body text-2xl text-navy-700/60 dark:text-cream-50/60 leading-relaxed max-w-2xl">Answer 6 simple questions about yourself — your state, age, income range, occupation, and family situation. No Aadhaar required. No login needed. Takes under 90 seconds.</p></div>
+        </div>
+      </div>
+      <div class="grid md:grid-cols-2 gap-5">
+        <div class="group p-8 rounded-3xl bg-gradient-to-br from-indigo-600/12 to-transparent border border-indigo-600/20 hover:border-indigo-500/40 transition-all duration-500 card-enter" data-observe>
+          <div class="font-mono font-black text-7xl text-indigo-500/12 group-hover:text-indigo-500/22 transition-colors duration-500 leading-none mb-4 select-none">02</div>
+          <h3 class="font-display font-extrabold text-4xl text-navy-900 dark:text-cream-50 mb-3">We Do The Thinking</h3>
+          <p class="font-body text-2xl text-navy-700/58 dark:text-cream-50/58 leading-relaxed">Our AI engine uses Gemini to cross-reference your profile against 1,247 schemes — every eligibility criterion, income threshold, and state-specific rule. Instantly.</p>
+        </div>
+        <div class="group p-8 rounded-3xl bg-gradient-to-br from-emerald-600/10 to-transparent border border-emerald-600/20 hover:border-emerald-500/40 transition-all duration-500 card-enter" data-observe>
+          <div class="font-mono font-black text-7xl text-emerald-500/12 group-hover:text-emerald-500/22 transition-colors duration-500 leading-none mb-4 select-none">03</div>
+          <h3 class="font-display font-extrabold text-4xl text-navy-900 dark:text-cream-50 mb-3">Get Your Personal List</h3>
+          <p class="font-body text-2xl text-navy-700/58 dark:text-cream-50/58 leading-relaxed">A prioritized list of every scheme you qualify for — with AI-generated explanations of why you qualify, required documents, and direct application links.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="eligibility" class="py-28 px-6">
+  <div class="max-w-3xl mx-auto">
+    <div class="flex items-center gap-3 mb-6 card-enter" data-observe><div class="h-px flex-1 bg-gradient-to-r from-transparent to-saffron-500/40"></div><span class="font-display font-bold text-2xl tracking-[5px] uppercase text-saffron-500">Eligibility Checker</span><div class="h-px flex-1 bg-gradient-to-l from-transparent to-saffron-500/40"></div></div>
+    <div class="relative p-8 md:p-12 rounded-3xl bg-black/4 dark:bg-white/4 backdrop-blur-xl border border-black/8 dark:border-white/10 shadow-glass overflow-hidden card-enter" data-observe>
+      <div class="absolute -top-20 -left-20 w-64 h-64 rounded-full bg-saffron-500/8 blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-16 -right-16 w-48 h-48 rounded-full bg-gold-500/6 blur-3xl pointer-events-none"></div>
+      <h2 class="font-display font-black text-4xl md:text-6xl mb-6 relative">Check Your <span class="text-saffron-500">Eligibility</span></h2>
+      <div class="space-y-5 relative">
+        <div>
+          <label class="font-display font-bold text-xl uppercase tracking-widest text-navy-700/40 dark:text-cream-50/40 mb-1.5 block">Email (optional — to save results)</label>
+          <div class="flex gap-2">
+            <input type="email" x-model="eligibilityForm.email" placeholder="you@example.com" class="flex-1 px-4 py-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-navy-900 dark:text-cream-50 placeholder-navy-700/25 dark:placeholder-cream-50/25 font-body focus:outline-none focus:ring-2 focus:ring-saffron-500/40 transition-all duration-200"/>
+            <button @click="loadDashboard()" x-show="eligibilityForm.email" class="shrink-0 px-4 py-3 rounded-xl border border-saffron-500/30 text-saffron-500 font-display font-bold text-sm hover:bg-saffron-500/10 transition-all whitespace-nowrap" title="Load your previously saved results">📥 Load</button>
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="font-display font-bold text-xl uppercase tracking-widest text-navy-700/40 dark:text-cream-50/40 mb-2 block">Age — <span x-text="eligibilityForm.age" class="text-saffron-500 font-mono text-sm"></span> yrs</label>
+            <input type="range" min="1" max="100" x-model="eligibilityForm.age" class="w-full cursor-pointer"/>
+          </div>
+          <div>
+            <label class="font-display font-bold text-xl uppercase tracking-widest text-navy-700/40 dark:text-cream-50/40 mb-1.5 block">Annual Income (₹)</label>
+            <input type="text" x-model="eligibilityForm.income" placeholder="e.g. 2,40,000" class="w-full px-4 py-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-navy-900 dark:text-cream-50 placeholder-navy-700/25 dark:placeholder-cream-50/25 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-saffron-500/40 transition-all duration-200"/>
+          </div>
+        </div>
+        <div x-data="{ stateOpen:false, stateSearch:'' }">
+          <label class="font-display font-bold text-xl uppercase tracking-widest text-navy-700/40 dark:text-cream-50/40 mb-1.5 block">State / UT</label>
+          <div class="relative">
+            <button @click="stateOpen=!stateOpen" type="button" class="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 hover:border-saffron-500/30 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-saffron-500/40">
+              <span class="font-body text-sm" :class="eligibilityForm.state?'text-navy-900 dark:text-cream-50':'text-navy-700/30 dark:text-cream-50/30'" x-text="eligibilityForm.state||'Select your state'"></span>
+              <svg class="w-4 h-4 text-navy-700/40 dark:text-cream-50/40 transition-transform duration-300" :class="stateOpen?'rotate-180':''" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div x-show="stateOpen" @click.outside="stateOpen=false" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95 -translate-y-2" x-transition:enter-end="opacity-100 scale-100 translate-y-0" class="absolute top-full left-0 right-0 mt-1 z-30 rounded-xl bg-cream-50 dark:bg-navy-800 border border-black/10 dark:border-white/10 shadow-2xl overflow-hidden" style="display:none">
+              <div class="p-2 border-b border-black/5 dark:border-white/5"><input type="text" x-model="stateSearch" placeholder="Search state..." @click.stop class="w-full px-3 py-2 rounded-lg bg-black/5 dark:bg-white/5 text-navy-900 dark:text-cream-50 text-sm font-body placeholder-navy-700/30 dark:placeholder-cream-50/30 focus:outline-none"/></div>
+              <ul class="max-h-48 overflow-y-auto p-2 space-y-0.5">
+                <template x-for="state in states.filter(s=>s.toLowerCase().includes(stateSearch.toLowerCase()))" :key="state">
+                  <li><button @click="eligibilityForm.state=state;stateOpen=false" class="w-full text-left px-3 py-2 rounded-lg text-sm font-display font-semibold text-navy-700/70 dark:text-cream-50/70 hover:bg-saffron-500/8 hover:text-saffron-500 transition-all duration-150" x-text="state"></button></li>
+                </template>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div>
+          <label class="font-display font-bold text-xl uppercase tracking-widest text-navy-700/40 dark:text-cream-50/40 mb-3 block">Category</label>
+          <div class="flex flex-wrap gap-2">
+            <template x-for="cat in categories" :key="cat.value">
+              <button @click="eligibilityForm.category=cat.value" class="px-4 py-2 rounded-full border font-display font-bold text-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-saffron-500/40" :class="eligibilityForm.category===cat.value?'bg-saffron-500 border-saffron-500 text-white shadow-saffron-glow scale-105':'bg-black/5 dark:bg-white/5 border-black/10 dark:border-white/10 text-navy-700/65 dark:text-cream-50/65 hover:border-saffron-500/30 hover:text-saffron-500'" x-text="cat.icon+' '+cat.label"></button>
+            </template>
+          </div>
+        </div>
+        <button @click="runEligibilityCheck()" type="button" class="w-full py-4 rounded-xl bg-saffron-gradient font-display font-black text-white text-2xl shadow-saffron-glow hover:scale-[1.02] active:scale-[0.98] transition-transform duration-150 relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-saffron-500/60">
+          <span x-show="!checking" class="flex items-center justify-center gap-2"><span x-text="t('Check Eligibility')||'Check Eligibility'"></span><span class="group-hover:translate-x-1 transition-transform duration-200">→</span></span>
+          <span x-show="checking" class="flex items-center justify-center gap-3"><svg class="w-5 h-5 animate-spin" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" stroke-dasharray="32" stroke-dashoffset="12"/></svg><span>AI is matching your profile...</span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tax" class="py-28 px-6">
+  <div class="max-w-5xl mx-auto">
+    <div class="flex items-center gap-3 mb-6 card-enter" data-observe><div class="h-px flex-1 bg-gradient-to-r from-transparent to-gold-500/40"></div><span class="font-display font-bold text-2xl tracking-[5px] uppercase text-gold-500">Tax Calculator</span><div class="h-px flex-1 bg-gradient-to-l from-transparent to-gold-500/40"></div></div>
+    <div class="relative p-8 md:p-12 rounded-3xl bg-navy-800/60 dark:bg-navy-800/60 bg-black/5 border border-black/8 dark:border-white/8 overflow-hidden card-enter" data-observe>
+      <div class="absolute top-0 inset-x-0 h-9 flex items-center px-5 gap-2 bg-black/20 border-b border-white/5"><div class="w-3 h-3 rounded-full bg-red-500/60"></div><div class="w-3 h-3 rounded-full bg-yellow-500/60"></div><div class="w-3 h-3 rounded-full bg-green-500/60"></div></div>
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_50%_60%_at_80%_20%,rgba(255,183,0,0.06)_0%,transparent_70%)] pointer-events-none"></div>
+      <div class="relative mt-6">
+        <h2 class="font-display font-black text-4xl md:text-4xl mb-1 text-white dark:text-cream-50">Income Tax <span class="text-gold-500">Calculator</span></h2>
+        <div class="flex p-1 rounded-xl bg-black/20 dark:bg-white/5 w-fit mb-8">
+          <template x-for="r in ['new','old','compare']" :key="r">
+            <button @click="taxRegime=r" class="px-4 md:px-6 py-2.5 rounded-lg font-display font-bold text-sm md:text-xl transition-all duration-300 capitalize focus:outline-none" :class="taxRegime===r?'bg-gold-500 text-navy-900 shadow-gold-glow':'text-white/50 dark:text-cream-50/50 hover:text-white/80 dark:hover:text-cream-50/80'" x-text="r==='new'?'🆕 New Regime':r==='old'?'🏛 Old Regime':'⚖️ Compare'"></button>
+          </template>
+        </div>
+        <div class="grid lg:grid-cols-2 gap-8">
+          <div class="space-y-4">
+            <div><label class="font-display font-bold text-xl uppercase tracking-widest text-white/40 dark:text-cream-50/40 mb-1.5 block">Gross Annual Salary (₹)</label><input type="text" x-model="taxForm.gross" @input="taxResults=null" placeholder="e.g. 12,00,000" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white dark:text-cream-50 placeholder-white/25 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-gold-500/40 focus:border-gold-500/40 transition-all duration-200"/></div>
+            <div x-show="taxRegime!=='new'" style="display:none" x-transition:enter="transition-all duration-300 ease-out" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" class="space-y-4 pl-4 border-l-2 border-gold-500/30">
+              <div><label class="font-display font-bold text-[10px] uppercase tracking-widest text-white/40 mb-1.5 block">Basic Salary (₹)</label><input type="text" x-model="taxForm.basic" placeholder="e.g. 6,00,000" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/25 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-gold-500/40 transition-all duration-200"/></div>
+              <div><label class="font-display font-bold text-[10px] uppercase tracking-widest text-white/40 mb-1.5 block">HRA Received (₹)</label><input type="text" x-model="taxForm.hra" placeholder="e.g. 2,40,000" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/25 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-gold-500/40 transition-all duration-200"/></div>
+              <div><label class="font-display font-bold text-[10px] uppercase tracking-widest text-white/40 mb-1.5 block">Annual Rent Paid (₹)</label><input type="text" x-model="taxForm.rent" placeholder="e.g. 1,80,000" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/25 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-gold-500/40 transition-all duration-200"/></div>
+              <div class="flex items-center gap-3"><input type="checkbox" id="metro" x-model="taxForm.metro" class="w-4 h-4 accent-gold-500 rounded"/><label for="metro" class="font-display font-bold text-sm text-white/70">Metro city (Delhi, Mumbai, Chennai, Kolkata)</label></div>
+              <div><label class="font-display font-bold text-[10px] uppercase tracking-widest text-white/40 mb-1.5 block">Professional Tax (₹/yr)</label><input type="text" x-model="taxForm.profTax" placeholder="e.g. 2,400" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-white/25 font-mono text-sm focus:outline-none focus:ring-2 focus:ring-gold-500/40 transition-all duration-200"/></div>
+            </div>
+            <button @click="calculateTax()" type="button" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-gold-500 to-saffron-500 font-display font-black text-navy-900 text-2xl shadow-gold-glow hover:scale-[1.02] active:scale-[0.98] transition-transform duration-150 focus:outline-none">⚡ Calculate Tax</button>
+          </div>
+          <div x-show="taxResults" class="space-y-4" x-transition:enter="transition-all duration-500 ease-out" x-transition:enter-start="opacity-0 translate-x-4" x-transition:enter-end="opacity-100 translate-x-0" style="display:none">
+            <div class="p-5 rounded-2xl bg-white/5 border border-white/8">
+              <div class="font-display font-bold text-xl uppercase tracking-widest text-white/40 mb-4">Tax Summary</div>
+              <template x-if="taxResults">
+                <div class="space-y-3">
+                  <div x-show="taxRegime!=='old'"><div class="flex justify-between items-center mb-1.5"><span class="font-display font-bold text-xl text-white/70">New Regime</span><span class="font-mono font-black text-gold-500" x-text="'₹ '+taxResults.newTax?.toLocaleString('en-IN')"></span></div><div class="h-2 rounded-full bg-white/8 overflow-hidden"><div class="h-full rounded-full transition-all duration-1000" :style="`width:${taxResults.newPct}%;background:linear-gradient(90deg,#FFB700,#FF6B00)`"></div></div><div class="font-display text-xl text-white/35 mt-1" x-text="`Effective rate: ${taxResults.newEffective}%`"></div></div>
+                  <div x-show="taxRegime!=='new'"><div class="flex justify-between items-center mb-1.5"><span class="font-display font-bold text-xl text-white/70">Old Regime</span><span class="font-mono font-black text-saffron-400" x-text="'₹ '+taxResults.oldTax?.toLocaleString('en-IN')"></span></div><div class="h-2 rounded-full bg-white/8 overflow-hidden"><div class="h-full rounded-full bg-saffron-gradient transition-all duration-1000" :style="`width:${taxResults.oldPct}%`"></div></div><div class="font-display text-xl text-white/35 mt-1" x-text="`Effective rate: ${taxResults.oldEffective}%`"></div></div>
+                  <div class="mt-4 p-4 rounded-xl border" :class="taxResults.recommendation==='new'?'bg-gold-500/10 border-gold-500/30':'bg-saffron-500/10 border-saffron-500/30'">
+                    <div class="font-display font-black text-xl" :class="taxResults.recommendation==='new'?'text-gold-400':'text-saffron-400'" x-text="taxResults.recommendation==='new'?'🆕 New Regime saves you more!':'🏛 Old Regime saves you more!'"></div>
+                    <div class="font-display font-bold text-xl text-white/55 mt-1" x-text="'You save ₹'+taxResults.savings?.toLocaleString('en-IN')+' by choosing this regime'"></div>
+                  </div>
+                </div>
+              </template>
+            </div>
+          </div>
+          <div x-show="!taxResults" class="flex flex-col items-center justify-center p-8 rounded-2xl bg-white/3 border border-white/6 text-center">
+            <div class="text-4xl mb-3 opacity-40">⚡</div>
+            <div class="font-display font-bold text-xl text-white/30 dark:text-cream-50/30">Enter your salary and click Calculate to see your tax breakdown</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="schemes" class="py-28 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex items-center gap-3 mb-6 card-enter" data-observe><div class="h-px flex-1 bg-gradient-to-r from-transparent to-saffron-500/40"></div><span class="font-display font-bold text-2xl tracking-[5px] uppercase text-saffron-500">Scheme Browser</span><div class="h-px flex-1 bg-gradient-to-l from-transparent to-saffron-500/40"></div></div>
+    <h2 class="font-display font-black text-4xl md:text-6xl text-navy-900 dark:text-cream-50 mb-3 card-enter" data-observe>Featured <span class="shimmer-saffron">Schemes</span></h2>
+    <div class="relative overflow-hidden rounded-3xl mb-12 card-enter" data-observe x-data="{ cur:0 }">
+      <div class="flex transition-transform duration-500 ease-out" :style="`transform:translateX(-${cur*100}%)`">
+        <template x-for="(s,idx) in featuredSchemes" :key="idx">
+          <div class="min-w-full"><div class="relative h-64 md:h-80 rounded-3xl flex flex-col justify-end p-8 overflow-hidden" :class="s.gradientClass"><div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div><div class="relative z-10"><div class="flex items-start justify-between mb-2"><span class="font-display font-bold text-xs tracking-widest uppercase px-3 py-1 rounded-full bg-white/15 text-white" x-text="s.category"></span><span class="font-mono font-black text-2xl text-white" x-text="s.benefit"></span></div><h3 class="font-display font-black text-2xl md:text-3xl text-white mb-1" x-text="s.name"></h3><p class="font-body text-white/70 text-sm leading-relaxed" x-text="s.desc"></p></div></div></div>
+        </template>
+      </div>
+      <button @click="cur=(cur-1+featuredSchemes.length)%featuredSchemes.length" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 backdrop-blur-sm border border-white/15 flex items-center justify-center text-white hover:bg-saffron-500/70 transition-all duration-200 focus:outline-none">←</button>
+      <button @click="cur=(cur+1)%featuredSchemes.length" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/40 backdrop-blur-sm border border-white/15 flex items-center justify-center text-white hover:bg-saffron-500/70 transition-all duration-200 focus:outline-none">→</button>
+      <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5"><template x-for="(s,i) in featuredSchemes" :key="i"><button @click="cur=i" class="h-1.5 rounded-full transition-all duration-300" :class="cur===i?'w-6 bg-saffron-500':'w-1.5 bg-white/35'" :aria-label="`Slide ${i+1}`"></button></template></div>
+    </div>
+    <div class="relative mb-8 card-enter" data-observe>
+      <div class="flex items-center gap-3 p-4 rounded-2xl bg-black/4 dark:bg-white/4 border border-black/8 dark:border-white/8 focus-within:border-saffron-500/40 transition-all duration-200">
+        <span class="text-2xl" x-show="!schemeSearchLoading">🔍</span>
+        <svg x-show="schemeSearchLoading" class="w-5 h-5 animate-spin text-saffron-500 shrink-0" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" stroke-dasharray="32" stroke-dashoffset="12"/></svg>
+        <input type="text" x-model="schemeSearchQuery" @input="onSchemeSearchInput()" placeholder="AI Search: e.g. 'housing subsidy for women' or 'farmer loan'" class="flex-1 bg-transparent text-navy-900 dark:text-cream-50 font-body text-lg placeholder-navy-700/30 dark:placeholder-cream-50/30 focus:outline-none"/>
+        <button x-show="schemeSearchQuery" @click="clearSchemeSearch()" class="shrink-0 w-6 h-6 flex items-center justify-center rounded-full bg-black/10 dark:bg-white/10 text-navy-700/50 dark:text-cream-50/50 hover:bg-saffron-500/20 hover:text-saffron-500 transition-all text-xs">✕</button>
+      </div>
+      <div x-show="schemeSearchResults.length>0" class="mt-2 text-sm font-display font-semibold text-saffron-500/70 px-1">AI found <span x-text="schemeSearchResults.length"></span> semantically matching schemes</div>
+    </div>
+    <div class="flex flex-wrap gap-2 mb-8 card-enter" data-observe>
+      <template x-for="f in schemeFilters" :key="f.value">
+        <button @click="filterCategory=f.value" class="px-4 py-2 rounded-full border font-display font-bold text-xs transition-all duration-200 focus:outline-none" :class="filterCategory===f.value?'bg-saffron-500 border-saffron-500 text-white shadow-saffron-glow':'bg-black/5 dark:bg-white/5 border-black/10 dark:border-white/10 text-navy-700/65 dark:text-cream-50/65 hover:border-saffron-500/30 hover:text-saffron-500'" x-text="f.label"></button>
+      </template>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <template x-for="scheme in filteredSchemes" :key="scheme.id">
+        <div @click="selectedScheme=scheme;schemeDetailModalOpen=true" class="group p-6 rounded-2xl border border-black/8 dark:border-white/8 bg-black/2 dark:bg-white/2 hover:border-saffron-500/30 hover:shadow-card-hover transition-all duration-300 cursor-pointer">
+          <div class="flex items-start gap-4 mb-4"><div class="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center text-2xl border border-black/8 dark:border-white/8 group-hover:scale-110 transition-transform duration-300" :class="scheme.iconBg" x-text="scheme.icon"></div><div class="flex-1 min-w-0"><span class="font-display font-bold text-[10px] tracking-widest uppercase text-saffron-500 block mb-1" x-text="scheme.category"></span><h3 class="font-display font-bold text-base text-navy-900 dark:text-cream-50 leading-snug" x-text="scheme.name"></h3></div></div>
+          <p class="font-body text-sm text-navy-700/58 dark:text-cream-50/58 leading-relaxed mb-4" x-text="scheme.desc"></p>
+          <div class="flex items-center justify-between"><span class="font-mono font-black text-gold-500 text-xl" x-text="scheme.benefit"></span><span class="font-display text-xs text-navy-700/40 dark:text-cream-50/40 px-2 py-1 rounded-full border border-black/8 dark:border-white/8" x-text="scheme.benefitType"></span></div>
+        </div>
+      </template>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="py-28 px-6">
+  <div class="max-w-3xl mx-auto">
+    <div class="flex items-center gap-3 mb-6 card-enter" data-observe><div class="h-px flex-1 bg-gradient-to-r from-transparent to-saffron-500/40"></div><span class="font-display font-bold text-2xl tracking-[5px] uppercase text-saffron-500">FAQ</span><div class="h-px flex-1 bg-gradient-to-l from-transparent to-saffron-500/40"></div></div>
+    <h2 class="font-display font-black text-4xl md:text-5xl text-navy-900 dark:text-cream-50 mb-12 card-enter" data-observe>Common <span class="shimmer-saffron">Questions</span></h2>
+    <div class="space-y-0 card-enter" data-observe>
+      <template x-for="(faq,idx) in faqs" :key="idx">
+        <div x-data="{ open:false }" class="border-b border-black/8 dark:border-white/8 last:border-0 group">
+          <button @click="open=!open" class="w-full flex items-center justify-between py-5 text-left focus:outline-none">
+            <span class="font-display font-bold text-lg text-navy-900 dark:text-cream-50 group-hover:text-saffron-500 transition-colors duration-200 pr-8 leading-snug" x-text="faq.q"></span>
+            <span class="shrink-0 w-7 h-7 rounded-full border border-black/15 dark:border-white/15 flex items-center justify-center text-navy-700/50 dark:text-cream-50/50 text-lg font-bold transition-all duration-300 group-hover:border-saffron-500/40 group-hover:text-saffron-500" :class="open?'rotate-45 bg-saffron-500/10 border-saffron-500/40 text-saffron-500':''">+</span>
+          </button>
+          <div x-show="open" x-transition:enter="transition-all duration-300 ease-out" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition-all duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" class="pb-5" style="display:none">
+            <p class="font-body text-navy-700/60 dark:text-cream-50/60 leading-relaxed" x-text="faq.a"></p>
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="py-28 px-6">
+  <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-start">
+    <div class="card-enter" data-observe>
+      <h2 class="font-display font-black text-4xl md:text-5xl text-navy-900 dark:text-cream-50 mb-4">Get in <span class="shimmer-saffron">Touch</span></h2>
+      <div class="grid grid-cols-2 gap-4 mb-8">
+        <div class="p-5 rounded-2xl bg-black/4 dark:bg-white/4 border border-black/8 dark:border-white/8 hover:border-saffron-500/25 transition-all duration-300 group cursor-pointer"><div class="text-2xl mb-3 group-hover:scale-110 transition-transform duration-200">📧</div><div class="font-display font-bold text-xl mb-1 text-navy-900 dark:text-cream-50">Email</div><div class="font-body text-lg text-navy-700/45 dark:text-cream-50/40">hello@janmitra.in</div></div>
+        <div class="p-5 rounded-2xl bg-black/4 dark:bg-white/4 border border-black/8 dark:border-white/8 hover:border-saffron-500/25 transition-all duration-300 group cursor-pointer"><div class="text-2xl mb-3 group-hover:scale-110 transition-transform duration-200">🐦</div><div class="font-display font-bold text-xl mb-1 text-navy-900 dark:text-cream-50">Twitter / X</div><div class="font-body text-lg text-navy-700/45 dark:text-cream-50/40">@JanMitraIndia</div></div>
+        <div class="p-5 rounded-2xl bg-black/4 dark:bg-white/4 border border-black/8 dark:border-white/8 hover:border-saffron-500/25 transition-all duration-300 group cursor-pointer"><div class="text-2xl mb-3 group-hover:scale-110 transition-transform duration-200">💬</div><div class="font-display font-bold text-xl mb-1 text-navy-900 dark:text-cream-50">WhatsApp</div><div class="font-body text-lg text-navy-700/45 dark:text-cream-50/40">+91 98765 43210</div></div>
+        <div class="p-5 rounded-2xl bg-black/4 dark:bg-white/4 border border-black/8 dark:border-white/8 hover:border-saffron-500/25 transition-all duration-300 group cursor-pointer"><div class="text-2xl mb-3 group-hover:scale-110 transition-transform duration-200">🏛</div><div class="font-display font-bold text-xl mb-1 text-navy-900 dark:text-cream-50">Press</div><div class="font-body text-lg text-navy-700/45 dark:text-cream-50/40">press@janmitra.in</div></div>
+      </div>
+    </div>
+    <div class="p-8 rounded-3xl bg-black/4 dark:bg-white/4 backdrop-blur-sm border border-black/8 dark:border-white/10 card-enter" data-observe x-data="{ contactForm:{name:'',email:'',subject:'',message:''}, sent:false }">
+      <template x-if="!sent">
+        <div class="space-y-4">
+          <div><label class="font-display font-bold text-xl uppercase tracking-widest text-navy-700/40 dark:text-cream-50/40 mb-1.5 block">Name</label><input type="text" x-model="contactForm.name" placeholder="Ramesh Kumar" class="w-full px-4 py-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-navy-900 dark:text-cream-50 placeholder-navy-700/25 dark:placeholder-cream-50/25 font-body focus:outline-none focus:ring-2 focus:ring-saffron-500/40 transition-all duration-200"/></div>
+          <div><label class="font-display font-bold text-xl uppercase tracking-widest text-navy-700/40 dark:text-cream-50/40 mb-1.5 block">Email</label><input type="email" x-model="contactForm.email" placeholder="you@example.com" class="w-full px-4 py-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-navy-900 dark:text-cream-50 placeholder-navy-700/25 dark:placeholder-cream-50/25 font-body focus:outline-none focus:ring-2 focus:ring-saffron-500/40 transition-all duration-200"/></div>
+          <div x-data="{ subjectOpen:false }">
+            <label class="font-display font-bold text-xl uppercase tracking-widest text-navy-700/40 dark:text-cream-50/40 mb-1.5 block">Subject</label>
+            <div class="relative">
+              <button @click="subjectOpen=!subjectOpen" type="button" class="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 hover:border-saffron-500/30 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-saffron-500/40"><span class="font-body text-sm" :class="contactForm.subject?'text-navy-900 dark:text-cream-50':'text-navy-700/30 dark:text-cream-50/30'" x-text="contactForm.subject||'Select subject'"></span><svg class="w-4 h-4 text-navy-700/40 dark:text-cream-50/40 transition-transform" :class="subjectOpen?'rotate-180':''" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg></button>
+              <div x-show="subjectOpen" @click.outside="subjectOpen=false" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-95 -translate-y-2" x-transition:enter-end="opacity-100 scale-100 translate-y-0" class="absolute top-full left-0 right-0 mt-1 z-20 rounded-xl bg-cream-50 dark:bg-navy-800 border border-black/10 dark:border-white/10 shadow-2xl overflow-hidden" style="display:none">
+                <ul class="p-2 space-y-0.5"><template x-for="sub in ['Report a missing scheme','Something is incorrect','Partnership / collaboration','General feedback','Media / press inquiry','Technical issue']" :key="sub"><li><button @click="contactForm.subject=sub;subjectOpen=false" class="w-full text-left px-3 py-2 rounded-lg text-sm font-display font-semibold text-navy-700/70 dark:text-cream-50/70 hover:bg-saffron-500/8 hover:text-saffron-500 transition-all duration-150" x-text="sub"></button></li></template></ul>
+              </div>
+            </div>
+          </div>
+          <div><label class="font-display font-bold text-xl uppercase tracking-widest text-navy-700/40 dark:text-cream-50/40 mb-1.5 block">Message</label><textarea x-model="contactForm.message" rows="4" placeholder="Tell us what's on your mind..." class="w-full px-4 py-3 rounded-xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-navy-900 dark:text-cream-50 placeholder-navy-700/25 dark:placeholder-cream-50/25 font-body focus:outline-none focus:ring-2 focus:ring-saffron-500/40 transition-all duration-200 resize-none"></textarea></div>
+          <button @click="sent=true" type="button" class="w-full py-4 rounded-xl bg-saffron-gradient font-display font-black text-white text-2xl shadow-saffron-glow hover:scale-[1.02] active:scale-[0.98] transition-transform duration-150 focus:outline-none">Send Message →</button>
+        </div>
+      </template>
+      <template x-if="sent"><div class="text-center py-12"><div class="text-5xl mb-4">🎉</div><h3 class="font-display font-black text-4xl text-navy-900 dark:text-cream-50 mb-2">Message Sent!</h3><p class="font-body text-2xl text-navy-700/60 dark:text-cream-50/55 mb-6">We'll get back to you within 24 hours.</p><button @click="sent=false;contactForm={name:'',email:'',subject:'',message:''}" class="px-6 py-2 rounded-full border border-saffron-500/40 text-saffron-500 font-display font-bold text-xl hover:bg-saffron-500/10 transition-all">Send another</button></div></template>
+    </div>
+  </div>
+</section>
+
+<footer class="border-t border-black/8 dark:border-white/6 pt-16 pb-8 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+      <div class="col-span-2 md:col-span-1">
+        <div class="font-display font-black text-2xl mb-3"><span class="text-navy-900 dark:text-cream-50">Jan</span><span class="shimmer-saffron">मित्र</span></div>
+        <div class="flex gap-3">
+          <a href="#" class="w-8 h-8 rounded-lg bg-black/5 dark:bg-white/5 border border-black/8 dark:border-white/8 flex items-center justify-center text-sm hover:bg-saffron-500/10 hover:border-saffron-500/30 transition-all duration-200" aria-label="Twitter">𝕏</a>
+          <a href="#" class="w-8 h-8 rounded-lg bg-black/5 dark:bg-white/5 border border-black/8 dark:border-white/8 flex items-center justify-center text-sm hover:bg-saffron-500/10 hover:border-saffron-500/30 transition-all duration-200" aria-label="Instagram">📸</a>
+          <a href="#" class="w-8 h-8 rounded-lg bg-black/5 dark:bg-white/5 border border-black/8 dark:border-white/8 flex items-center justify-center text-sm hover:bg-saffron-500/10 hover:border-saffron-500/30 transition-all duration-200" aria-label="GitHub">⌨</a>
+        </div>
+      </div>
+      <div><div class="font-display font-bold text-2xl uppercase tracking-widest text-navy-700/40 dark:text-cream-50/35 mb-4">Schemes</div><ul class="space-y-2"><template x-for="l in ['Agriculture','Health','Housing','Education','Women','Youth']" :key="l"><li><a href="#schemes" class="font-display font-semibold text-sm text-navy-700/60 dark:text-cream-50/55 hover:text-saffron-500 transition-colors" x-text="l"></a></li></template></ul></div>
+      <div><div class="font-display font-bold text-xl uppercase tracking-widest text-navy-700/40 dark:text-cream-50/35 mb-4">Tools</div><ul class="space-y-2"><template x-for="l in ['Eligibility Checker','Tax Calculator','Scheme Finder','Document Checklist','Application Guide']" :key="l"><li><a href="#" class="font-display font-semibold text-sm text-navy-700/60 dark:text-cream-50/55 hover:text-saffron-500 transition-colors" x-text="l"></a></li></template></ul></div>
+      <div><div class="font-display font-bold text-xl uppercase tracking-widest text-navy-700/40 dark:text-cream-50/35 mb-4">Stay Updated</div><div class="flex gap-2" x-data="{ newsletterEmail:'', subbed:false }"><template x-if="!subbed"><div class="flex gap-2 w-full"><input type="email" x-model="newsletterEmail" placeholder="your@email.com" class="flex-1 min-w-0 px-3 py-2 rounded-lg bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-navy-900 dark:text-cream-50 text-xl font-body placeholder-navy-700/30 dark:placeholder-cream-50/30 focus:outline-none focus:ring-1 focus:ring-saffron-500/40"/><button @click="subbed=true" class="shrink-0 px-3 py-2 rounded-lg bg-saffron-500 text-white font-display font-bold text-xs hover:bg-saffron-600 transition-colors focus:outline-none">→</button></div></template><template x-if="subbed"><span class="font-display font-bold text-xs text-saffron-500">✓ Subscribed!</span></template></div></div>
+    </div>
+    <div class="overflow-hidden border-t border-black/5 dark:border-white/5 pt-5 mb-5"><div class="flex motion-safe:animate-ticker whitespace-nowrap"><template x-for="i in 5" :key="i"><span class="inline-flex items-center gap-6 shrink-0 font-display font-bold text-2xl tracking-widest uppercase text-navy-700/20 dark:text-cream-50/15 mr-6">Jan मित्र — आपका साथी &nbsp;·&nbsp; 1247 Schemes &nbsp;·&nbsp; Always Free &nbsp;·&nbsp; No Login Required &nbsp;·&nbsp; Privacy First &nbsp;·&nbsp; Made for Bharat &nbsp;·&nbsp;</span></template></div></div>
+    <div class="flex flex-wrap items-center justify-between gap-4 text-xl font-display font-semibold text-navy-700/30 dark:text-cream-50/25"><span>© 2025 Jan मित्र</span><div class="flex gap-5"><a href="#" class="hover:text-saffron-500 transition-colors">Privacy</a><a href="#" class="hover:text-saffron-500 transition-colors">Terms</a><a href="#" class="hover:text-saffron-500 transition-colors">Disclaimer</a></div><span>~Vijayant</span></div>
+  </div>
+</footer>
+
+<div x-show="eligibilityModalOpen" x-transition:enter="transition-opacity duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click.self="eligibilityModalOpen=false" @keydown.escape.window="eligibilityModalOpen=false" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-end md:items-center justify-center p-4" style="display:none">
+  <div x-show="eligibilityModalOpen" x-transition:enter="transition-all duration-400 ease-out" x-transition:enter-start="opacity-0 scale-95 translate-y-8" x-transition:enter-end="opacity-100 scale-100 translate-y-0" x-transition:leave="transition-all duration-250 ease-in" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-3xl bg-cream-50 dark:bg-navy-800 border border-saffron-500/20 shadow-[0_40px_80px_rgba(0,0,0,0.5)]" style="display:none" role="dialog" aria-modal="true">
+    <div class="sticky top-0 z-10 px-7 pt-7 pb-5 bg-cream-50 dark:bg-navy-800 border-b border-black/5 dark:border-white/5 rounded-t-3xl">
+      <div class="flex items-center gap-3 px-4 py-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 mb-4"><span class="text-xl">🎉</span><span class="font-display font-bold text-emerald-600 dark:text-emerald-400 text-sm">We found <span class="font-mono font-black text-lg" x-text="matchedSchemes.length"></span> schemes you qualify for!</span></div>
+      <div class="flex items-start justify-between">
+        <div><h3 class="font-display font-black text-2xl text-navy-900 dark:text-cream-50">Your Matched Schemes</h3><p class="font-body text-xs text-navy-700/50 dark:text-cream-50/50 mt-1">Sorted by AI eligibility score</p></div>
+        <button @click="eligibilityModalOpen=false" aria-label="Close" class="w-9 h-9 rounded-full bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 flex items-center justify-center text-navy-700/60 dark:text-cream-50/60 hover:text-navy-900 dark:hover:text-cream-50 transition-all text-sm focus:outline-none focus:ring-2 focus:ring-saffron-500/40">✕</button>
+      </div>
+    </div>
+    <div class="p-7 space-y-4">
+      <template x-for="(s,idx) in matchedSchemes" :key="idx">
+        <div class="p-5 rounded-2xl bg-black/3 dark:bg-white/4 border border-black/8 dark:border-white/8 hover:border-saffron-500/25 transition-all duration-300 group">
+          <div class="flex items-start gap-4">
+            <div class="shrink-0 w-12 h-12 rounded-xl flex items-center justify-center text-2xl border border-black/8 dark:border-white/8" x-text="s.icon"></div>
+            <div class="flex-1 min-w-0">
+              <div class="flex items-start justify-between gap-3 mb-1"><h4 class="font-display font-bold text-base text-navy-900 dark:text-cream-50" x-text="s.name"></h4><span class="shrink-0 font-mono font-black text-xs px-2 py-1 rounded-full bg-saffron-500/10 text-saffron-500" x-text="s.match+'% match'"></span></div>
+              <p class="font-body text-sm text-navy-700/58 dark:text-cream-50/55 leading-relaxed mb-2" x-text="s.desc"></p>
+              <div x-show="s.explanation" class="mb-2 px-3 py-2 rounded-lg bg-emerald-500/8 border border-emerald-500/15 flex items-start gap-2"><span class="text-emerald-500 text-xs shrink-0 mt-0.5">✓</span><p class="font-body text-xs text-emerald-700 dark:text-emerald-400 leading-relaxed italic" x-text="s.explanation"></p></div>
+              <div class="flex items-center gap-3"><span class="font-mono font-black text-gold-500 text-lg" x-text="s.benefit"></span><span class="font-display text-xs text-navy-700/40 dark:text-cream-50/35" x-text="s.benefitType"></span></div>
+              <div class="mt-2 h-1 rounded-full bg-black/8 dark:bg-white/8 overflow-hidden"><div class="h-full rounded-full bg-saffron-gradient transition-all duration-1000" :style="`width:${s.match}%`"></div></div>
+            </div>
+          </div>
+        </div>
+      </template>
+      <div class="pt-2 text-center"><p class="font-body text-xs text-navy-700/40 dark:text-cream-50/35 mb-4">These AI results are indicative. Always verify eligibility on official government portals.</p><button @click="eligibilityModalOpen=false" class="px-8 py-3 rounded-full bg-saffron-gradient font-display font-bold text-white text-sm shadow-saffron-glow hover:scale-105 transition-transform focus:outline-none">Done ✓</button></div>
+    </div>
+  </div>
+</div>
+
+<div x-show="schemeDetailModalOpen" x-transition:enter="transition-opacity duration-300" x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100" x-transition:leave="transition-opacity duration-200" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click.self="schemeDetailModalOpen=false" @keydown.escape.window="schemeDetailModalOpen=false" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-end md:items-center justify-center p-4" style="display:none">
+  <div x-show="schemeDetailModalOpen" x-transition:enter="transition-all duration-400 ease-out" x-transition:enter-start="opacity-0 scale-95 translate-y-8" x-transition:enter-end="opacity-100 scale-100 translate-y-0" x-transition:leave="transition-all duration-250" x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95" class="relative w-full max-w-xl max-h-[80vh] overflow-y-auto rounded-3xl bg-cream-50 dark:bg-navy-800 border border-saffron-500/20 shadow-[0_40px_80px_rgba(0,0,0,0.5)]" style="display:none" role="dialog" aria-modal="true">
+    <template x-if="selectedScheme">
+      <div>
+        <div class="p-7 border-b border-black/5 dark:border-white/5 flex items-start gap-4">
+          <div class="shrink-0 w-14 h-14 rounded-xl flex items-center justify-center text-3xl border border-black/8 dark:border-white/8" :class="selectedScheme.iconBg" x-text="selectedScheme.icon"></div>
+          <div class="flex-1"><span class="font-display font-bold text-[10px] tracking-widest uppercase text-saffron-500 block mb-1" x-text="selectedScheme.category"></span><h3 class="font-display font-black text-xl text-navy-900 dark:text-cream-50" x-text="selectedScheme.name"></h3><div class="flex items-center gap-3 mt-2"><span class="font-mono font-black text-gold-500 text-xl" x-text="selectedScheme.benefit"></span><span class="font-display text-xs text-navy-700/40 dark:text-cream-50/35" x-text="selectedScheme.benefitType"></span></div></div>
+          <button @click="schemeDetailModalOpen=false" aria-label="Close" class="shrink-0 w-9 h-9 rounded-full bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 flex items-center justify-center text-sm focus:outline-none focus:ring-2 focus:ring-saffron-500/40">✕</button>
+        </div>
+        <div class="p-7 space-y-5">
+          <div><div class="font-display font-bold text-xs uppercase tracking-widest text-navy-700/40 dark:text-cream-50/35 mb-2">About</div><p class="font-body text-navy-700/65 dark:text-cream-50/65 leading-relaxed" x-text="selectedScheme.fullDesc"></p></div>
+          <div><div class="font-display font-bold text-xs uppercase tracking-widest text-navy-700/40 dark:text-cream-50/35 mb-2">Eligibility</div><ul class="space-y-1.5"><template x-for="e in selectedScheme.eligibility" :key="e"><li class="flex items-start gap-2 text-sm font-body text-navy-700/65 dark:text-cream-50/60"><span class="text-saffron-500 shrink-0 mt-0.5">✓</span><span x-text="e"></span></li></template></ul></div>
+          <div><div class="font-display font-bold text-xs uppercase tracking-widest text-navy-700/40 dark:text-cream-50/35 mb-2">Required Documents</div><div class="flex flex-wrap gap-2"><template x-for="d in selectedScheme.docs" :key="d"><span class="px-3 py-1 rounded-full bg-black/5 dark:bg-white/5 border border-black/8 dark:border-white/8 font-display font-semibold text-xs text-navy-700/65 dark:text-cream-50/65" x-text="d"></span></template></div></div>
+          <a :href="selectedScheme.link" target="_blank" rel="noopener" class="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-saffron-gradient font-display font-bold text-white text-sm shadow-saffron-glow hover:scale-[1.02] transition-transform">Apply on Official Portal →</a>
+        </div>
+      </div>
+    </template>
+  </div>
+</div>
+
+<div class="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3">
+  <div x-show="chatOpen" x-transition:enter="transition-all duration-300 ease-out" x-transition:enter-start="opacity-0 translate-y-4 scale-95" x-transition:enter-end="opacity-100 translate-y-0 scale-100" x-transition:leave="transition-all duration-200 ease-in" x-transition:leave-start="opacity-100 translate-y-0 scale-100" x-transition:leave-end="opacity-0 translate-y-4 scale-95" class="chat-window w-80 md:w-96 rounded-3xl bg-cream-50 dark:bg-navy-800 border border-saffron-500/20 shadow-[0_30px_60px_rgba(0,0,0,0.4)] overflow-hidden flex flex-col" style="height:480px;display:none">
+    <div class="flex items-center gap-3 px-5 py-4 bg-saffron-gradient shrink-0">
+      <div class="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center text-lg">🤖</div>
+      <div class="flex-1"><div class="font-display font-black text-white text-sm">Jan मित्र AI</div><div class="font-display text-white/70 text-xs">Powered by Gemini · Always Free</div></div>
+      <button @click="chatOpen=false" class="w-7 h-7 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center text-white text-xs transition-colors focus:outline-none">✕</button>
+    </div>
+    <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-3">
+      <template x-for="(msg,idx) in chatMessages" :key="idx">
+        <div class="flex" :class="msg.role==='user'?'justify-end':'justify-start'">
+          <div class="max-w-[80%] rounded-2xl px-4 py-2.5" :class="msg.role==='user'?'bg-saffron-500 text-white rounded-br-sm':'bg-black/6 dark:bg-white/8 text-navy-900 dark:text-cream-50 rounded-bl-sm'">
+            <p class="font-body text-sm leading-relaxed" x-text="msg.content"></p>
+            <p class="font-display text-[10px] mt-1 opacity-50" x-text="msg.time"></p>
+          </div>
+        </div>
+      </template>
+      <div x-show="chatLoading" class="flex justify-start"><div class="bg-black/6 dark:bg-white/8 rounded-2xl rounded-bl-sm px-4 py-3 flex gap-1.5 items-center"><span class="w-1.5 h-1.5 rounded-full bg-saffron-500 animate-bounce" style="animation-delay:0ms"></span><span class="w-1.5 h-1.5 rounded-full bg-saffron-500 animate-bounce" style="animation-delay:150ms"></span><span class="w-1.5 h-1.5 rounded-full bg-saffron-500 animate-bounce" style="animation-delay:300ms"></span></div></div>
+    </div>
+    <div class="p-3 border-t border-black/8 dark:border-white/8 shrink-0">
+      <div class="flex gap-2 items-end">
+        <textarea x-model="chatInput" @keydown="onChatKey($event)" rows="1" placeholder="Ask about schemes, eligibility, documents..." class="flex-1 px-4 py-2.5 rounded-2xl bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 text-navy-900 dark:text-cream-50 font-body text-sm placeholder-navy-700/30 dark:placeholder-cream-50/30 focus:outline-none focus:ring-2 focus:ring-saffron-500/40 resize-none transition-all"></textarea>
+        <button @click="sendChatMessage()" :disabled="chatLoading||!chatInput.trim()" class="shrink-0 w-10 h-10 rounded-2xl bg-saffron-gradient flex items-center justify-center text-white hover:scale-105 active:scale-95 transition-transform disabled:opacity-40 disabled:pointer-events-none focus:outline-none">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <button @click="chatOpen=!chatOpen" class="group flex items-center gap-2.5 px-5 py-3 rounded-full bg-saffron-gradient text-white font-display font-black text-sm shadow-saffron-glow hover:scale-105 active:scale-95 transition-transform motion-safe:animate-pulse-glow focus:outline-none focus:ring-2 focus:ring-saffron-500/60" aria-label="Open AI Chat">
+    <span class="text-lg" x-text="chatOpen?'✕':'🤖'"></span>
+    <span x-show="!chatOpen">Ask Jan मित्र AI</span>
+  </button>
+</div>
+
+</body></html>
+
