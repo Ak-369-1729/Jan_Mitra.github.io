@@ -7,7 +7,6 @@ require('dotenv').config();
 
 const express    = require('express');
 const cors       = require('cors');
-const rateLimit  = require('express-rate-limit');
 const { GoogleGenerativeAI } = require('@google/generative-ai');
 const { createClient }       = require('@supabase/supabase-js');
 
@@ -16,6 +15,8 @@ const { buildUserProfile } = require('./agents/profileAgent');
 const { discoverBenefits, searchSchemes } = require('./agents/discoveryAgent');
 
 const app  = express();
+const deadlineRoutes = require('./routes/deadline');
+const voiceRoutes = require('./routes/voice');
 const PORT = process.env.PORT || 3001;
 
 // ── Clients ──────────────────────────────────────────────────────────────────
@@ -131,15 +132,27 @@ app.post('/api/chat', async (req, res) => {
   try {
     const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
-    // Try to find relevant schemes via semantic search first
-    let schemeContext = '';
-    try {
-      const schemes = await searchSchemes(message);
-      if (schemes.length > 0) {
-        schemeContext = '\n\nRelevant schemes from database:\n' +
-          schemes.map(s => `• ${s.name} (${s.category}): ${s.desc} — Benefit: ${s.benefit}`).join('\n');
-      }
-    } catch { /* silent */ }
+    // Fast local keyword match — zero API calls, instant
+    const QUICK_SCHEMES = [
+      { name:'PM Kisan Samman Nidhi',   category:'Agriculture', desc:'Direct income support for farmers.',         benefit:'₹6,000/yr' },
+      { name:'Ayushman Bharat PM-JAY',  category:'Health',      desc:'Health insurance for BPL families.',         benefit:'₹5 Lakh'   },
+      { name:'PM Awas Yojana',          category:'Housing',     desc:'Housing subsidy for urban poor.',            benefit:'₹2.5 Lakh' },
+      { name:'PM Mudra Yojana',         category:'Finance',     desc:'Micro loans for small businesses.',          benefit:'₹10 Lakh'  },
+      { name:'MGNREGA',                 category:'Employment',  desc:'100 days wage employment guarantee.',        benefit:'₹267+/day' },
+      { name:'PM Ujjwala Yojana',       category:'Women',       desc:'Free LPG connection for BPL women.',         benefit:'Free LPG'  },
+      { name:'Beti Bachao Beti Padhao', category:'Women',       desc:'Girl child education and welfare.',          benefit:'Free'      },
+      { name:'Post Matric Scholarship', category:'Education',   desc:'Scholarship for SC/ST students.',            benefit:'₹7,000/yr' },
+      { name:'PM Fasal Bima Yojana',    category:'Agriculture', desc:'Crop insurance for farmers.',                benefit:'Insurance' },
+      { name:'Sukanya Samriddhi Yojana',category:'Finance',     desc:'Savings scheme for girl child education.',   benefit:'8.2% p.a.' },
+    ];
+    const q = message.toLowerCase();
+    const matched = QUICK_SCHEMES.filter(s =>
+      s.name.toLowerCase().split(' ').some(w => w.length > 3 && q.includes(w)) ||
+      q.includes(s.category.toLowerCase())
+    );
+    const schemeContext = matched.length > 0
+      ? '\n\nRelevant schemes:\n' + matched.map(s => `• ${s.name} (${s.category}): ${s.desc} — Benefit: ${s.benefit}`).join('\n')
+      : '';
 
     const systemPrompt = `You are Jan मित्र AI, a friendly and knowledgeable assistant that helps Indian citizens discover government welfare schemes they qualify for.
 
@@ -156,11 +169,16 @@ Context about available schemes:${schemeContext}
 
 Conversation history is provided for context.`;
 
-    // Build chat history
-    const chatHistory = (history || []).map(msg => ({
+    // Build chat history — Gemini requires history to START with a user message
+    // so we drop any leading assistant/model messages (e.g. the welcome message)
+    const rawHistory = (history || []).map(msg => ({
       role: msg.role === 'assistant' ? 'model' : 'user',
       parts: [{ text: msg.content }],
     }));
+    // Find the index of the first 'user' turn and slice from there
+    const firstUserIdx = rawHistory.findIndex(m => m.role === 'user');
+    // Also drop the LAST message (current user message — we send it via sendMessage)
+    const chatHistory = firstUserIdx >= 0 ? rawHistory.slice(firstUserIdx, -1) : [];
 
     const chat = model.startChat({
       systemInstruction: systemPrompt,
@@ -291,6 +309,8 @@ app.get('/api/schemes', async (_req, res) => {
 });
 
 // ── 404 catch-all ──────────────────────────────────────────────────────────────
+app.use('/api/deadlines', deadlineRoutes);
+app.use('/api/voice', voiceRoutes);
 app.use((_req, res) => {
   res.status(404).json({ error: 'Endpoint not found' });
 });
